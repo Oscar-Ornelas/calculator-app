@@ -128,7 +128,9 @@ class App extends React.Component {
     const num2 = this.state.num2;
     const sign = this.state.operation;
     if(num1 !== "" && num2 !== ""){
-      const answer = eval(num1 + sign + num2);
+      let answer = eval(num1 + sign + num2);
+      answer = Math.round(answer * 10000) / 10000;
+      console.log(answer);
       this.setState({flip: false, num1: "", num2 : "", answer: answer});
     }
   }
