@@ -51,6 +51,9 @@ function CalculatorComponent (props){
         <div onClick={props.chooseOperation} className="button column-4">
           <h1>+</h1>
         </div>
+        <div onClick={props.backspace} className="button zero">
+          <h1><i className="fas fa-backspace"></i></h1>
+        </div>
         <div onClick={props.addNumber} className="button zero">
           <h1>0</h1>
         </div>

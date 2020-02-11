@@ -71,6 +71,12 @@ class Calculator extends React.Component {
     });
   }
 
+  backspace = (event) => {
+
+    this.setState(prevState => ({nums: !this.state.turn ? [prevState.nums[0].slice(0, -1), prevState.nums[1]]
+                                             : [prevState.nums[0], prevState.nums[1].slice(0, -1)] }))
+  }
+
 
   chooseOperation = (event) => {
     const {innerText} = event.target;
@@ -114,6 +120,7 @@ class Calculator extends React.Component {
         />
 
         <CalculatorComponent
+          backspace={this.backspace}
           calculatePercentage={this.calculatePercentage}
           equate={this.equate}
           chooseOperation={this.chooseOperation}
