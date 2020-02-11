@@ -22,10 +22,10 @@ class Calculator extends React.Component {
 
       if(nums[turn].includes("-")){
         this.setState(prevState => ({ nums: !turn ? [`${prevState.nums[0].replace('-', '')}`, prevState.nums[1]]
-                                                  : [prevState.nums[0], `${prevState.nums[0].replace('-', '')}`] }));
+                                                  : [prevState.nums[0], `${prevState.nums[1].replace('-', '')}`] }));
       } else {
         this.setState(prevState => ({ nums: !turn ? [`-${prevState.nums[0]}`, prevState.nums[1]]
-                                                  : [prevState.nums[1], `-${prevState.nums[0]}`] }));
+                                                  : [prevState.nums[0], `-${prevState.nums[1]}`] }));
       }
 
     }
