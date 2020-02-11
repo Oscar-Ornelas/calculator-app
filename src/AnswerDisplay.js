@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Display(props){
+function AnswerDisplay(props){
   let display;
-  if(props.flip) {
-    display = props.num2;
+  if(props.turn) {
+    display = props.nums[1];
   } else {
-    display = props.num1;
+    display = props.nums[0];
   }
 
   return (
@@ -15,4 +15,4 @@ function Display(props){
   )
 }
 
-export default Display;
+export default AnswerDisplay;

@@ -22,7 +22,7 @@ body {
 .display {
   display: flex;
   grid-column: span 4;
-  background: #2d2f33;
+  background: #1d1f1d;
   width: 100%;
   justify-content: flex-end;
 }
@@ -39,17 +39,22 @@ body {
   padding-top: 0.35em;
   text-align: center;
   border: 1px solid black;
-  background: #f7f7f7;
-}
-
-.column-4 {
-  background: #5af2cc;
+  background: #ffffff;
 }
 
 .zero {
   grid-column: span 2;
 }
 
+.row-2 {
+  background: #d1d1d1;
+}
+
+.column-4 {
+  background: #24bd24;
+}
+
+/*Media Query*/
 @media (max-width: 650px) {
   .count {
     font-size: 4.5rem;
