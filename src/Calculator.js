@@ -6,18 +6,19 @@ class Calculator extends React.Component {
   state = {
     operation: "",
     nums: ["", ""],
-    turn: 0
+    turn: 0,
+    answer: 0
   }
 
   clear = () => {
-    this.setState({ nums: ["",""], turn: 0} );
+    this.setState({ nums: ["",""], turn: 0, answer: 0} );
   }
 
   signChange = () => {
     const nums = this.state.nums;
     const turn = this.state.turn;
 
-    if(nums[turn] !== "" && nums[turn] !== "0"){
+    if(nums[turn] !== "" && nums[turn] !== "0" && nums[turn] !== "NaN"){
 
       if(nums[turn].includes("-")){
         this.setState(prevState => ({ nums: !turn ? [`${prevState.nums[0].replace('-', '')}`, prevState.nums[1]]
@@ -33,16 +34,22 @@ class Calculator extends React.Component {
   addNumber = (event) => {
     const {innerText} = event.target;
     const nums = this.state.nums;
+    const turn = this.state.turn;
 
     this.setState(prevState => {
-      if(nums[this.state.turn].length < 10 && !this.state.flip && nums[this.state.turn] !== "0"){
+      if(!turn && prevState.nums[0] === this.state.answer){
         return {
-          nums : !this.state.turn ? [`${prevState.nums[0]}${innerText}`, prevState.nums[1]]
-                                  : [prevState.nums[0], `${prevState.nums[1]}${innerText}`]
+          nums: [innerText, ""],
+          answer: 0
         }
-      }
-    })
-  }
+      } else if(nums[turn].length < 10 && nums[turn] !== "0" && nums[turn] !== "Infinity" & nums[turn] !== "NaN"){
+          return {
+            nums : !turn ? [`${prevState.nums[0]}${innerText}`, prevState.nums[1]]
+                         : [prevState.nums[0], `${prevState.nums[1]}${innerText}`]
+          }
+        }
+      })
+    }
 
   addDecimal = (event) => {
     const {innerText} = event.target;
@@ -57,7 +64,7 @@ class Calculator extends React.Component {
     }
 
     this.setState(prevState => {
-      if(numDots < 1 && nums[turn] !== "") {
+      if(numDots < 1 && nums[turn] !== "" && nums[turn] !== "Infinity" && nums[turn] !== "NaN") {
         return {
           nums : !turn ? [`${prevState.nums[0]}${innerText}`, prevState.nums[1]]
                        : [prevState.nums[0], `${prevState.nums[1]}${innerText}`]
@@ -72,9 +79,11 @@ class Calculator extends React.Component {
   }
 
   backspace = (event) => {
+    const turn = this.state.turn;
 
-    this.setState(prevState => ({nums: !this.state.turn ? [prevState.nums[0].slice(0, -1), prevState.nums[1]]
-                                             : [prevState.nums[0], prevState.nums[1].slice(0, -1)] }))
+    this.setState(prevState => ({nums: (!turn && prevState.nums[turn] !== "Infinity" &&  prevState.nums[turn] !== "NaN")
+                                       ? [prevState.nums[0].slice(0, -1), prevState.nums[1]]
+                                       : [prevState.nums[0], prevState.nums[1].slice(0, -1)] }))
   }
 
 
@@ -82,24 +91,28 @@ class Calculator extends React.Component {
     const {innerText} = event.target;
     let sign;
 
-    if(innerText === "+" || innerText === "-"){
-      sign = innerText;
-    } else if(innerText === "X"){
-      sign = "*";
-    } else {
-      sign = "/";
+    if(this.state.nums[this.state.turn] !== "NaN"){
+      if(innerText === "+" || innerText === "-"){
+        sign = innerText;
+      } else if(innerText === "X"){
+        sign = "*";
+      } else {
+        sign = "/";
+      }
+
+      this.setState({ operation: sign, turn: 1 });
     }
-
-    this.setState({ operation: sign, turn: 1 });
-
   }
 
   equate = () => {
     const operation = this.state.operation;
-    if(this.state.nums[0] !== "" && this.state.nums[1] !== ""){
+    const nums = this.state.nums;
+
+    if(nums[0] !== "" && nums[1] !== "" && nums[0] !== "NaN" && nums[1] !== "NaN")
+    {
       let answer = eval(`${this.state.nums[0]}  ${operation} ${this.state.nums[1]}`);
       answer = (Math.round(answer * 10000) / 10000).toString();
-      this.setState({turn: 0, nums: [answer, ""]});
+      this.setState({turn: 0, nums: [answer, ""], answer: answer});
     }
   }
 
