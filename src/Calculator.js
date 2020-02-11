@@ -18,7 +18,7 @@ class Calculator extends React.Component {
     const nums = this.state.nums;
     const turn = this.state.turn;
 
-    if(nums[turn] !== "" && nums[turn] !== "0" && nums[turn] !== "NaN"){
+    if(nums[turn] !== "" && nums[turn] !== "0" && nums[turn] !== "0.0" && nums[turn] !== "NaN"){
 
       if(nums[turn].includes("-")){
         this.setState(prevState => ({ nums: !turn ? [`${prevState.nums[0].replace('-', '')}`, prevState.nums[1]]
