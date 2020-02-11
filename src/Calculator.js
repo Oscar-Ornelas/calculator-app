@@ -6,12 +6,11 @@ class Calculator extends React.Component {
   state = {
     operation: "",
     nums: ["", ""],
-    answer: 0,
     turn: 0
   }
 
   clear = () => {
-    this.setState({ nums: ["",""], turn: 0, answer: 0} );
+    this.setState({ nums: ["",""], turn: 0} );
   }
 
   signChange = () => {
@@ -39,8 +38,7 @@ class Calculator extends React.Component {
       if(nums[this.state.turn].length < 10 && !this.state.flip && nums[this.state.turn] !== "0"){
         return {
           nums : !this.state.turn ? [`${prevState.nums[0]}${innerText}`, prevState.nums[1]]
-                                  : [prevState.nums[0], `${prevState.nums[1]}${innerText}`],
-          answer: 0
+                                  : [prevState.nums[0], `${prevState.nums[1]}${innerText}`]
         }
       }
     })
@@ -94,15 +92,14 @@ class Calculator extends React.Component {
     const operation = this.state.operation;
     if(this.state.nums[0] !== "" && this.state.nums[1] !== ""){
       let answer = eval(`${this.state.nums[0]}  ${operation} ${this.state.nums[1]}`);
-      answer = Math.round(answer * 10000) / 10000;
-      this.setState({turn: 0, nums: ["",""], answer: answer});
+      answer = (Math.round(answer * 10000) / 10000).toString();
+      this.setState({turn: 0, nums: [answer, ""]});
     }
   }
 
   calculatePercentage = () => {
     const turn = this.state.turn;
     const num = (parseFloat(this.state.nums[turn]) / 100).toString();
-
     this.setState(prevState => ({ nums: !turn ? [num, prevState.nums[1]]
                                               : [prevState.nums[0], num] }));
   }
@@ -112,7 +109,6 @@ class Calculator extends React.Component {
     return (
       <>
         <AnswerDisplay
-        answer={this.state.answer}
         nums={this.state.nums}
         turn={this.state.turn}
         />

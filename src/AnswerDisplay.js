@@ -10,7 +10,7 @@ function AnswerDisplay(props){
 
   return (
     <div className="display">
-      <h1 className="count">{display.length === 0 ? props.answer : display}</h1>
+      <h1 className="count">{display.length === 0 ? 0 : display}</h1>
     </div>
   )
 }
