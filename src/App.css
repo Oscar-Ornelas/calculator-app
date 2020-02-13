@@ -28,10 +28,15 @@ body {
   justify-content: flex-end;
 }
 
-.count {
-  padding: 0.3em 0.5em 0.3em 0;
+.equation-small,
+.equation-big {
+  padding: 0.3em 0.5em 0.1em 0;
   color: white;
-  font-size: 5.75rem;
+  font-size: 4.5rem;
+}
+
+.equation-small {
+  font-size: 2.75rem;
 }
 
 /* Button */
@@ -56,8 +61,13 @@ body {
 }
 
 /*Media Query*/
-@media (max-width: 650px) {
-  .count {
-    font-size: 4.5rem;
+@media (min-width: 650px) {
+  .equation-big {
+    font-size: 5.75rem;
   }
+
+  .equation-small {
+    font-size: 4rem;
+  }
+
 }
