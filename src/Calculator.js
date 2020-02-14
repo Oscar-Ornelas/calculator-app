@@ -4,12 +4,11 @@ import AnswerDisplay from './AnswerDisplay';
 
 class Calculator extends React.Component {
   state = {
-    answer: 0,
     equation: "0"
   }
 
   clear = () => {
-    this.setState({answer: 0, equation: "0"} );
+    this.setState({equation: "0"} );
   }
 
   signChange = () => {
@@ -103,8 +102,8 @@ class Calculator extends React.Component {
 
       this.setState(prevState => {
         const prevEquation = prevState.equation;
-        const lastChar = prevEquation[prevEquation.length - 1]
-        if(lastChar !== " "){
+        const lastChar = prevEquation[prevEquation.length - 1];
+        if(lastChar !== " " && lastChar !== "-"){
              return {
                equation: `${prevState.equation} ${sign} `
              }
