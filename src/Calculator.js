@@ -73,9 +73,13 @@ class Calculator extends React.Component {
     this.setState(prevState => {
       const equation = prevState.equation;
       if(equation !== "Infinity" && equation !== "NaN") {
-        if(equation.slice(-1) === " "){
+        if(equation[equation.length - 1] === " "){
           return {
             equation: `${equation.slice(0, -3)}`
+          }
+        } else if(equation[equation.length-2] === "-"){
+          return {
+            equation: `${equation.slice(0, -3)} `
           }
         } else if(equation.length === 1){
           return {
