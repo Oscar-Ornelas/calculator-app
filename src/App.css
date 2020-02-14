@@ -28,6 +28,14 @@ body {
   justify-content: flex-end;
 }
 
+.blink {
+  animation: blinker 1.3s linear infinite;
+}
+
+@keyframes blinker {
+  40% { opacity: 10%; }
+}
+
 .equation-small,
 .equation-big {
   padding: 0.3em 0.5em 0.1em 0;
