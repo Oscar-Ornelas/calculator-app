@@ -77,6 +77,10 @@ class Calculator extends React.Component {
           return {
             equation: `${equation.slice(0, -3)}`
           }
+        } else if(equation.length === 1){
+          return {
+            equation: "0"
+          }
         } else {
           return {
             equation: equation.slice(0, -1)
