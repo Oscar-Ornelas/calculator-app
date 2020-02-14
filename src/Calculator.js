@@ -103,11 +103,18 @@ class Calculator extends React.Component {
       this.setState(prevState => {
         const prevEquation = prevState.equation;
         const lastChar = prevEquation[prevEquation.length - 1];
-        if(lastChar !== " " && lastChar !== "-"){
+        const secondToLastChar = prevEquation[prevEquation.length - 2];
+        if(secondToLastChar === "*" || secondToLastChar === "+"
+           || secondToLastChar === "/" || secondToLastChar === "-") {
+             const slicedString = prevEquation.substring(0, prevEquation.length - 3);
              return {
-               equation: `${prevState.equation} ${sign} `
+               equation: `${slicedString} ${sign} `
              }
-           }
+           } else if(lastChar !== " " && lastChar !== "-"){
+               return {
+                 equation: `${prevEquation} ${sign} `
+               }
+             }
       });
     }
   }
