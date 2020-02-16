@@ -112,9 +112,10 @@ class Calculator extends React.Component {
         const prevEquation = prevState.equation;
         const lastChar = prevEquation[prevEquation.length - 1];
         const secondToLastChar = prevEquation[prevEquation.length - 2];
+        let slicedString;
         if(secondToLastChar === "*" || secondToLastChar === "+"
-           || secondToLastChar === "/" || secondToLastChar === "-") {
-             const slicedString = prevEquation.substring(0, prevEquation.length - 3);
+           || secondToLastChar === "/" || secondToLastChar === "-" && lastChar === " ") {
+             slicedString = prevEquation.substring(0, prevEquation.length - 3);
              return {
                equation: `${slicedString} ${sign} `
              }
